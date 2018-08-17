@@ -7,8 +7,11 @@
 int a[9]={0};
 int b[9] = {1,2,3,4,5,6,7,8,9};
 int a_val=0,count=0,x,y,divisor=0,dividend=0,flag=0,flag1=0;
-double tmp,tmp1,tmp2,tmp3;
-
+double tmp;
+/*
+对输入数据存放在一个数组中
+并对数据判断是否为1~9这9个数
+*/
 void array_sort(int ii,int jj,int kk){
 	int i,j,v;
 	flag1=true;
@@ -225,16 +228,16 @@ int func(int orig,int sep_count){
 	{
 		while(is_num_zero(y)||num_is_double(y))
 		{
-			y--;
+			y--; /*过滤加数中带0和重复的数据*/
 		}
-		//printf("yyyyyy=%d\n",y);
+
 		divisor = pow(10,(8+sep_count)/2);
 		y_sep = sep_number(y);
 		while(divisor > 0)
 		{
-			//printf("$$$$$$$$$$$$$$$$$divisor=%d  y=%d\n",divisor,y);
 			while(num_is_double(divisor)||is_num_zero(divisor)||num_sep_compare(y,divisor))
 			{
+				/*过滤分数中重复、带0或者和加数相同的数据*/
 				divisor--;
 				if(divisor==1)
 					break;
@@ -263,12 +266,10 @@ int func(int orig,int sep_count){
 				
 				while(num_is_double(dividend)|| is_num_zero(dividend)||num_sep_compare(y,dividend)||num_sep_compare(divisor,dividend))
 				{
+					/*过滤分母中重复、带0或者和加数相同的数据*/
 					dividend--;
 				}
-				
-				//if(y==27)
-					//printf("x=%d  y =%d  divisor=%d  dividend=%d\n",x,y,divisor,dividend);
-				
+				/*如下为判断数据是否符合 x = y + m/n 的要求，其中y,m,n为1~9中9个数据的组合*/
 				tmp = (double)divisor/(double)dividend;
 				if((double)x==((double)y+tmp))
 				{
