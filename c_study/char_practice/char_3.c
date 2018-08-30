@@ -17,7 +17,6 @@ ABCDEF A
 
 1
 */
-
 #include<stdio.h>
 
 int main(void)
@@ -27,11 +26,7 @@ int main(void)
 	char target = ' ';
 	
 	gets(str);
-	while(str[i] != '\0'){
-		i++;
-	}
-	target=str[i-1];
-	i=0;
+    scanf("%c",&target);
 	while(str[i] != '\0'){
 		if(str[i] == ' ')
 			break;
@@ -48,6 +43,6 @@ int main(void)
 		}
 		i++;
 	}
-	free(str);
+    free(str);
 	printf("%d\n",count);
 }
