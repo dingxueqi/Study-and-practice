@@ -32,7 +32,6 @@ int main(void)
 	}
 	target=str[i-1];
 	i=0;
-	//printf("target =%c\n",target);
 	while(str[i] != '\0'){
 		if(str[i] == ' ')
 			break;
@@ -49,5 +48,6 @@ int main(void)
 		}
 		i++;
 	}
+	free(str);
 	printf("%d\n",count);
 }
