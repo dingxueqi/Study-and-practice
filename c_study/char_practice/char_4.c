@@ -41,7 +41,7 @@ int string_is_valid(char *string){
 int main(void)
 {
 	char *str = (char *)malloc(500);
-	int len=0,digital;
+	int len=0,digital=0;
 	int old=0;
 	while(1){
 		gets(str);
