@@ -46,14 +46,14 @@ int main(void)
 	while(1){
 		gets(str);
 		if(str[0]!='0'&&(str[1]!='x' || str[1]!='X')){
-			printf("unvalid data(hex)!\n");
+			//printf("unvalid data(hex)!\n");
 			free(str);
-			return -1;
+			return 0;
 		}
 		if(!string_is_valid(str)){
-			printf("unvalid data\n");
+			//printf("unvalid data\n");
 			free(str);
-			return -1;
+			return 0;
 		}
 		for (len = 2; len < count+2; len++)
 		{
