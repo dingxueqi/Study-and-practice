@@ -50,23 +50,23 @@ OutputArray    输出处理后的随机整数
 
 void norepeat_sort(int sort[],int array_num)
 {
-    int i=0,j=0,count=0,flag=0,temp=0;
-    int *outputarray=NULL;
-    outputarray=(int *)malloc(array_num*sizeof(int));
-    for(i=0;i<array_num;i++)
+	int i=0,j=0,count=0,flag=0,temp=0;
+	int *outputarray=NULL;
+	outputarray=(int *)malloc(array_num*sizeof(int));
+	for(i=0;i<array_num;i++)
     {
-		 if(0==i){
-            outputarray[0]=sort[0];
+		if(0==i){
+			outputarray[0]=sort[0];
 			count++;
-            continue;
-        }
-        for(j=0;j < i ;j++)
-        {
-            if(outputarray[j]==sort[i]){
+			continue;
+		}
+		for(j=0;j < i ;j++)
+		{
+			if(outputarray[j]==sort[i]){
 				flag=1;
-                break;
+				break;
 			}
-        }
+		}
 		if(1==flag)
 		{
 			flag=0;
@@ -74,8 +74,7 @@ void norepeat_sort(int sort[],int array_num)
 			outputarray[count]=sort[i];
 			count++;
 		}
-
-    }
+	}
 	for(i=0;i < count-1;i++)
 	{
 		for(j=i+1;j < count;j++)
@@ -89,26 +88,26 @@ void norepeat_sort(int sort[],int array_num)
 		}	
 	}
 	for(i=0;i<count;i++)
-    {
-        printf("%d \n",outputarray[i]);
-    }
-    //printf("\n");
-    free(outputarray);
-    return;
+	{
+		printf("%d \n",outputarray[i]);
+	}
+	//printf("\n");
+	free(outputarray);
+	return;
 }
 
 int main(void)
 {
-    int input_Num=0,i=0;
-    int * inputArray = NULL;
-    scanf("%d",&input_Num);
-    inputArray = (int *)malloc(sizeof(int)*input_Num);
+	int input_Num=0,i=0;
+	int * inputArray = NULL;
+	scanf("%d",&input_Num);
+	inputArray = (int *)malloc(sizeof(int)*input_Num);
 
-    for(i=0;i<input_Num;i++)
-    {
-        scanf("%d",&inputArray[i]);
-    }
-    norepeat_sort(inputArray,input_Num);
-    free(inputArray);
-    return 0;
+	for(i=0;i<input_Num;i++)
+	{
+		scanf("%d",&inputArray[i]);
+	}
+	norepeat_sort(inputArray,input_Num);
+	free(inputArray);
+	return 0;
 }
