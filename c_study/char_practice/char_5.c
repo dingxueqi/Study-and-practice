@@ -47,6 +47,72 @@ OutputArray    输出处理后的随机整数
 */
 #include<stdio.h>
 #include<stdlib.h>
+#define USE_GETS_INPUT
+#define  true 1
+#define  false 0
+char sample[11] = {'0','1','2','3','4','5','6','7','8','9',' '};
+int convert_array[1000] = {0};
+static int count = 0,input_data_num=0,flag1 = 0;
+/*
+解析一段字符串，第一个为要输入的个数，以空格为分隔符，把char数字转化成Int存到数组中
+如输入5 32 98 87 3 2 
+返回5，32 98 87 3 2 分别存在convert_array数组中
+*/
+int string_to_int(char *string){
+	int i=0,j=0,flag=0,data=0,digital=0,flag2=0;
+	int blank = true;
+	while(string[i]!='\0')
+	{
+		flag = -1;
+		data=digital;
+		for(j=0;j<11;j++)
+		{
+			if(string[i] == sample[j]){
+				flag = 1;
+				blank=true;
+				break;
+			}
+		}
+		if(string[i]!= ' ')
+		{
+			digital = string[i]-48;
+		}
+		if(string[i]==' '){
+			flag = 2;
+		}else if (flag == 1){
+			flag = 1;
+		}else {
+			flag2 = 1;
+		}
+		if(flag == 1)
+		{
+			digital = data*10+digital;
+		} else if (flag == -1){
+			blank = false;
+			digital = 0;
+		}else if(flag == 2){
+			if(blank){
+				if(count ==0 && flag1 ==0)
+				{
+					input_data_num = digital;
+					flag1 = 1;
+				}else {
+					if(flag2!=1){
+						convert_array[count] = digital;
+						count++;
+					}
+				}
+				flag2 = 0;
+				blank = false;
+			}
+			digital = 0;
+		}
+		i++;
+	}
+
+	return count;
+}
+
 
 void norepeat_sort(int sort[],int array_num)
 {
@@ -96,8 +162,18 @@ void norepeat_sort(int sort[],int array_num)
 	return;
 }
 
+
 int main(void)
 {
+	#if defined(USE_GETS_INPUT)
+	char * inputArray = NULL;
+	int i=0,ret_val=0;
+	inputArray = (int *)malloc(sizeof(int)*1000);
+	gets(inputArray);
+	ret_val = string_to_int(inputArray);
+	norepeat_sort(convert_array,ret_val);
+	free(inputArray);
+	#else
 	int input_Num=0,i=0;
 	int * inputArray = NULL;
 	scanf("%d",&input_Num);
@@ -109,5 +185,6 @@ int main(void)
 	}
 	norepeat_sort(inputArray,input_Num);
 	free(inputArray);
+	#endif
 	return 0;
 }
