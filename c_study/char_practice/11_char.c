@@ -49,6 +49,7 @@ int main(void)
 			i++;
 		}
 	}
+	free(string);
 	printf("%d\n",k);
 	
 }
