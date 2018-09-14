@@ -33,9 +33,7 @@ typedef struct student{
 	int value;
 	struct student *next;
 } LinkList;
-
-void delet(LinkList *list, int n);
-
+/*创建链表并动态申请空间存储index-value*/
 LinkList *creat(int n){
 	LinkList *head, *node, *end;//定义头节点，普通节点，尾部节点；
 	head = malloc(sizeof(LinkList));//分配地址
@@ -56,7 +54,7 @@ LinkList *creat(int n){
 	end->next = NULL;//结束创建
 	return head;
 }
-
+/*冒泡对index进行从小到大排序*/
 void bubbleSort(LinkList *list)
 {
     if((list -> next == NULL) || (list -> next -> next == NULL))
@@ -67,7 +65,6 @@ void bubbleSort(LinkList *list)
     LinkList *head, * pre, * cur, *next, * end, * temp;
     head = list;
     end = NULL;
-    //从链表头开始将较大值往后沉
     while(head -> next != end)
     {
         for(pre = head, cur = pre -> next, next = cur -> next; next != end; pre = pre -> next, cur = cur -> next, next = next -> next)
@@ -86,42 +83,40 @@ void bubbleSort(LinkList *list)
         end = cur;
     }
 }
-
+/*去掉重复的index并把index中值相加保存*/
 void norepeat(LinkList *list,int n) {
-	LinkList *temp = NULL,*cur=NULL;
+	LinkList *temp = NULL,*cur=NULL,*pre = NULL;
 	int i = 0,j  =0,k=0;
-	if(n==1)
-		return;
-	else if(n > 1)
-		temp= list->next;
-	else
-		return;
+	pre = list;
 	
-	for(i=1;i<n;i++)
+	for(i=1;i < n;i++)
 	{
-		cur = temp;
+		cur = pre->next;
 		for(j=i;j < n;j++)
 		{	
-			printf("$$$$$$$$$$$ temp->index=%d cur->next->index=%d\n",temp->index,cur->next->index);
 			if(cur->next!=NULL){
-				if(temp->index == cur->next->index)
+				if(pre->next->index == cur->next->index)
 				{
-					 cur->next->value=  cur->next->value + temp->value;
-					printf("temp->index=%d  n=%d j=%d\n",temp->index,n,j);
-					delet(list,i);
+					pre->next->value =  pre->next->value + cur->next->value;
+					if(cur->next->next != NULL)
+						temp = cur->next->next;
+					else
+						temp = NULL;
+					free(cur->next);
+					cur->next=temp;
 					n--;
 					j--;
 					continue;
 				}
 				cur=cur->next;
-			}
+			} 
 		}
-		temp=temp->next;
+		pre=pre->next;
 	}
 
 	return;
 }
-
+/*打印节点中的index-value*/
 void printf_LinkList(LinkList *list)
 {
 	list = list->next;
@@ -131,25 +126,7 @@ void printf_LinkList(LinkList *list)
 		list = list->next;
 	}
 }
-
-void delet(LinkList *list, int n) {
-	LinkList *t = list, *in;
-	int i = 1;
-	while (i < n && t != NULL) {
-		in = t;
-		t = t->next;
-		i++;
-	}
-	if (t != NULL) {
-		in->next = t->next;
-		free(t);
-	}
-	else {
-		printf("nodes is not exist!\n");
-	}
-	return;
-}
-
+/*释放申请空间*/
 void Free_LinkList(LinkList *list)
 {
 	LinkList *temp = list;
@@ -171,13 +148,9 @@ int main(void)
 	scanf("%d\n",&input_num);
 	
 	key_value = creat(input_num);
-	printf("creat success!\n");
 	norepeat(key_value,input_num);
-	printf("norepeat success!\n");
 	bubbleSort(key_value);
-	printf("sort \n");
 	printf_LinkList(key_value);
-	printf("printf !\n");
 	Free_LinkList(key_value);
 	return 0;
 	
