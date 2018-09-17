@@ -77,7 +77,7 @@ void dict_sort(LinkList_Word *list)
             while(cur -> words[i] !='\0' && next -> words[i] !='\0')
             {
 				if((cur -> words[i] > next -> words[i]) \
-                   || ((cur -> words[i] == next -> words[i]) && next->words[i+1]=='\0')){
+				|| ((cur -> words[i] == next -> words[i]) && next->words[i+1]=='\0')){
 					cur -> next = next -> next;
 					pre -> next = next;
 					next -> next = cur;
@@ -86,14 +86,14 @@ void dict_sort(LinkList_Word *list)
 					cur = temp;
 					break;
 				}else if((cur -> words[i] < next -> words[i]) \
-                ||((cur -> words[i] == next -> words[i]) && cur->words[i+1]=='\0')){
+				||((cur -> words[i] == next -> words[i]) && cur->words[i+1]=='\0')){
 					break;
 				}
 				i++;
-            }
+			}
 			i = 0;
-        }
-        end = cur;
+		}
+		end = cur;
 	}
 }
 void printf_word(LinkList_Word * list)
@@ -127,7 +127,6 @@ int main(void)
 		return -1;
 	list = creat(input_num);
 	dict_sort(list);
-	//printf("################\n");
 	printf_word(list);
 	Free_LinkList(list);
 	return 0;
