@@ -31,7 +31,7 @@ boy a am I
 #include<string.h>
 char * reverse(char *string)
 {
-	int count=0,i=0,j=0,cur=0;
+	int count=0,i=0,j=0,k=0,word=0;
 	char *str = NULL;
 	while(string[count]!='\0')
 	{
@@ -39,21 +39,36 @@ char * reverse(char *string)
 	}
 	str = (char *)malloc(count+1);
 	memset(str,0,count+1);
-	printf("@@@@@=%s\n",string);
+
 	for(i=count-1;i>=0;i--)
 	{
-		if(string[i]==' ')
+		if(string[i] == ' ' || i == 0)
 		{
-			for(j=cur;j<count-i;j++)
+			if(i == 0)
 			{
-				
-				str[j]=string[i+1+j];
-				printf("&&&&&&&&    str[%d]=%c   string[%d]=%c\n",j,str[j],i+j+1,string[i+j+1]);
+				word++;
+				for(j=0;j<word;j++){
+					str[k]=string[i+j];
+					k++;
+				}
+				word = 0;
+			}else{
+				for(j=0;j < word;j++)
+				{
+					str[k]=string[i+j+1];
+					k++;
+				}
+				str[k]= ' ';
+				k++;
+				word = 0;
 			}
-			cur = j;
+		}
+		if(string[i] != ' ')
+			word++;
+		if(i == 0){
+			str[k+1]='\0';
 		}
 	}
-	printf("####=%s\n",str);
 	return str;
 }
 int main(void)
