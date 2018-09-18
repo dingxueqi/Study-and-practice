@@ -44,12 +44,12 @@ A10;S20;W10;D30;X;A1A;B10A11;;A10;
 
 int main(void)
 {
-    
-	int i=0,temp = 0;
+
+    int i=0,temp = 0;
     long x=0,y=0;
-	char *string = (char *)malloc(10000);
-	
-	while(scanf("%s",string) != EOF){
+    char *string = (char *)malloc(10000);
+
+    while(scanf("%s",string) != EOF){
         x=y=i=temp=0;
         while(string[i] != '\0')
         {
@@ -117,6 +117,6 @@ int main(void)
         }
         printf("%lld,%lld\n",x,y);
     }
-	free(string);
-	return 0;
+    free(string);
+    return 0;
 }
