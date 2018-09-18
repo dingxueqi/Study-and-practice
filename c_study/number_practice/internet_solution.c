@@ -42,6 +42,8 @@ void jude(void)
 			z = sum(j+1,9);	
 			if((p-x)*z==y)
 			{
+				if(x==0)
+					break;
 				printf(" %d = %d + %d / %d \n", p, x, y, z);
 				count++;
 			}
